@@ -17,4 +17,9 @@ public class CommentsMongo {
     public Long like;
     public Long dislike;
 
+    public CommentsMongo(String id) {
+        this.id = id;
+        this.like = 0L;
+        this.dislike = 0L;
+    }
 }
