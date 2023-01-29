@@ -20,6 +20,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 @Slf4j
 @CrossOrigin
 @RestController
+@RequestMapping("/api")
 public class CommentsController {
 	@Autowired
 	private HRDAO departmentRepository;
