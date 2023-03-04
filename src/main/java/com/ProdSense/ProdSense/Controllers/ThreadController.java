@@ -1,6 +1,5 @@
 package com.ProdSense.ProdSense.Controllers;
 
-import com.ProdSense.ProdSense.Entitys.Comments;
 import com.ProdSense.ProdSense.Entitys.ThreadEntity;
 import com.ProdSense.ProdSense.Repositorys.ThreadRepo;
 import org.springframework.beans.factory.annotation.Autowired;

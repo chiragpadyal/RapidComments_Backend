@@ -5,8 +5,6 @@ import java.util.Objects;
 import java.util.Optional;
 
 import com.ProdSense.ProdSense.Entitys.Comments;
-import com.ProdSense.ProdSense.Entitys.CommentsMongo;
-import com.ProdSense.ProdSense.Repositorys.CommentsMongoRepo;
 import com.ProdSense.ProdSense.Repositorys.HRDAO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,13 +57,6 @@ public class CommentsController {
 			}
 
 			deptRec = departmentRepository.save(deptInput);
-
-			/* Store id to mongoDB */
-			CommentsMongo commentsMongo = new CommentsMongo(
-					deptRec.getId()
-			);
-			commentsMongoRepo.save(commentsMongo);
-
 			return ResponseEntity.ok(deptRec);
 		}
 		catch(Exception e){
@@ -102,30 +93,10 @@ public class CommentsController {
 		}
 	};
 
-
-	@Autowired
-	CommentsMongoRepo commentsMongoRepo;
-
-	@GetMapping("/getCommentProp/{commentId}")
-	public ResponseEntity<CommentsMongo> getCommentProp(@PathVariable("commentId") String commentId) {
-		try{
-			CommentsMongo commentsMongo = commentsMongoRepo.findById(commentId).get();
-			log.error("Likes Are: {}", commentsMongo.getLike());
-			return ResponseEntity.ok(commentsMongo);
-		} catch(Exception e){
-			log.error(e.getMessage());
-			return new ResponseEntity<>(null , HttpStatus.NOT_FOUND);
-		}
-	}
-
 	@PutMapping("/updateComment/{commentId}/like")
 	public ResponseEntity<Object> updateLike(@PathVariable("commentId") String commentId) {
 		try{
-			Comments comment = departmentRepository.findById(commentId).get();
-			CommentsMongo commentsMongo = commentsMongoRepo.findById(comment.getId()).get();
-			commentsMongo.setLike(commentsMongo.getLike() + 1);
-			commentsMongoRepo.save(commentsMongo);
-			return ResponseEntity.ok(commentsMongo);
+			return ResponseEntity.ok("commentsMongo");
 		} catch(Exception e){
 			log.error(e.getMessage());
 			return new ResponseEntity<>(null , HttpStatus.NOT_FOUND);
@@ -135,11 +106,7 @@ public class CommentsController {
 	@PutMapping("/updateComment/{commentId}/dislike")
 	public ResponseEntity<Object> updateDislike(@PathVariable("commentId") String commentId) {
 		try{
-			Comments comment = departmentRepository.findById(commentId).get();
-			CommentsMongo commentsMongo = commentsMongoRepo.findById(comment.getId()).get();
-			commentsMongo.setDislike(commentsMongo.getDislike() + 1);
-			commentsMongoRepo.save(commentsMongo);
-			return ResponseEntity.ok(commentsMongo);
+			return ResponseEntity.ok("commentsMongo");
 		} catch(Exception e){
 			log.error(e.getMessage());
 			return new ResponseEntity<>(null , HttpStatus.NOT_FOUND);
