@@ -6,8 +6,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.w3c.dom.Text;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.List;
 
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
@@ -26,11 +29,35 @@ public class ThreadComment {
     @JoinColumn(name="user_id", referencedColumnName = "id", nullable = false)
     private User user;
 
+    @Column(length = 25000)
+    private String content;
+
+/*
+
+    @Column(length = 25000)
+    private String content;
+
+    @Column(columnDefinition = "bytea")
+    private byte[] content;
+
+    @Lob
+    @Column(columnDefinition="TEXT")
     private String content;
 
     @CreationTimestamp
     @Column(name = "created_at", columnDefinition = "TIMESTAMP WITH TIME ZONE", nullable = false, updatable = false)
-    private Instant createdAt;
+    private Instant createdAt;*/
+
+
+    @Column(name = "created_at", columnDefinition = "TIMESTAMP WITH TIME ZONE", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
+    @PrePersist
+    public void onCreate() {
+        createdAt = LocalDateTime.ofInstant(Instant.now(), ZoneOffset.UTC);
+    }
+
+
     //  private ZonedDateTime createdAt = ZonedDateTime.now(ZoneOffset.UTC);
 
     @Column(name = "last_modified", columnDefinition = "TIMESTAMP WITH TIME ZONE")
@@ -40,6 +67,9 @@ public class ThreadComment {
     private Long likes;
     @Column(name = "dislikes", columnDefinition = "bigint default 0")
     private Long dislikes;
+
+    private  Long quality;
+
 
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY)
@@ -72,8 +102,10 @@ public class ThreadComment {
 */
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<ThreadComment> children;
+
+
 
     @JsonBackReference
     @ManyToOne(cascade=CascadeType.PERSIST)
