@@ -1,7 +1,6 @@
 package com.ProdSense.ProdSense.Repositorys;
 
 import com.ProdSense.ProdSense.Entitys.CommentMeta;
-import com.ProdSense.ProdSense.Entitys.ThreadComment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

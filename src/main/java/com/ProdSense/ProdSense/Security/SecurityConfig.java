@@ -48,11 +48,10 @@ public class SecurityConfig {
 
     }
 
-//    @Override
-//    public void configure(WebSecurity web) throws Exception {
-//        web.ignoring().antMatchers("employees");
-//    }
-
+    // @Override
+    // public void configure(WebSecurity web) throws Exception {
+    // web.ignoring().antMatchers("employees");
+    // }
 
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
@@ -60,8 +59,7 @@ public class SecurityConfig {
                 HttpMethod.GET.name(),
                 HttpMethod.PUT.name(),
                 HttpMethod.POST.name(),
-                HttpMethod.DELETE.name()
-        ));
+                HttpMethod.DELETE.name()));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration.applyPermitDefaultValues());
@@ -87,6 +85,5 @@ public class SecurityConfig {
         jwtAuthConverter.setJwtGrantedAuthoritiesConverter(jwtAuthoritiesConverter);
         return jwtAuthConverter;
     }
-
 
 }

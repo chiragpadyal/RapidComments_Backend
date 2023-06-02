@@ -1,4 +1,5 @@
 package com.ProdSense.ProdSense.Controllers;
+
 import com.ProdSense.ProdSense.ServiceImpl.AdminService;
 import com.ProdSense.ProdSense.ServiceImpl.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -6,7 +7,6 @@ import com.ProdSense.ProdSense.Entitys.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -71,7 +71,7 @@ public class AdminController {
     /**
      * @return null
      * @apiNote This method is used to trigger a fetch, in backend to populate users
-     * in the database
+     *          in the database
      */
     @GetMapping(value = "users/populate")
     public ResponseEntity<String> fetchUsers() {

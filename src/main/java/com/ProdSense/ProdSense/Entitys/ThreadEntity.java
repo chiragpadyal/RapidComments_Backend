@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -30,10 +29,11 @@ public class ThreadEntity {
     }
 
     @JsonBackReference
-    @OneToMany(mappedBy="thread")
+    @OneToMany(mappedBy = "thread")
     private Set<ThreadComment> threads = new HashSet<ThreadComment>();
 
-
-/*    @OneToMany(mappedBy = "thread", cascade = CascadeType.ALL)
-    private List<ThreadComment> comments;*/
+    /*
+     * @OneToMany(mappedBy = "thread", cascade = CascadeType.ALL)
+     * private List<ThreadComment> comments;
+     */
 }
