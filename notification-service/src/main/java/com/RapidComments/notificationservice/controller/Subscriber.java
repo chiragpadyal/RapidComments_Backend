@@ -13,6 +13,8 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -33,10 +35,10 @@ public class Subscriber {
     }
 
     @RabbitListener(queues = RabbitMqConfiguration.EMAIL_QUEUE)
-    public void receiveMail(@Payload EmailModel emailModel) {
+    public void receiveMail(@Payload EmailModel[][] emailModels) {
         try {
-            mailtrapClient.sendEmail(emailModel);
-        } catch (MessagingException | IOException |  TemplateException e) {
+            mailtrapClient.sendEmail(emailModels);
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

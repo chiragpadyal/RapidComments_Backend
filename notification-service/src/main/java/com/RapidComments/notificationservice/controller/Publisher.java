@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequestMapping("/notify")
@@ -28,9 +30,9 @@ public class Publisher {
 
 
     @PostMapping("/push-mail")
-    public String publishEmail(@RequestBody EmailModel emailModel) {
+    public String publishEmail(@RequestBody EmailModel[][] emailModels) {
         template.convertAndSend(RabbitMqConfiguration.EXCHANGE,
-                RabbitMqConfiguration.EMAIL_ROUTING_KEY, emailModel);
+                RabbitMqConfiguration.EMAIL_ROUTING_KEY, emailModels);
         return "Email Published";
     }
 

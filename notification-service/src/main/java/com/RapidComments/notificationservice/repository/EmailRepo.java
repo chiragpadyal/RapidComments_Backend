@@ -8,10 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface EmailRepo extends JpaRepository<EmailModel, UUID> {
-    List<EmailModel> findByEmailIdAndIsRead(String emailId, boolean isRead);
-
+public interface EmailRepo extends JpaRepository<EmailModel, Long> {
     List<EmailModel> findByIsRead(boolean isRead);
-
 }
 

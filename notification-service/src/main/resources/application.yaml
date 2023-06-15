@@ -1,30 +1,13 @@
-
 spring:
   application:
     name: notification-service
   config:
     import: "optional:configserver:http://localhost:8088"
-
-  datasource:
-    url: jdbc:postgresql://localhost:5432/rapidcomment
-    username: postgres
-    password: password
-  jpa:
-    show-sql: false
-    hibernate:
-      ddl-auto: update
-
-  rabbitmq:
-    host: "127.0.0.1"
-    port: "5672"
-    username: "guest"
-    password: "guest"
-
   mail:
-    host: "live.smtp.mailtrap.io"
-    port: 587
-    username: "api"
-    password: 
+    host: ${mail-trap.host}
+    port: ${mail-trap.port}
+    username: ${mail-trap.username}
+    password: ${mail-trap.api-key}
     auth: "PLAIN"
     starttls:
       enable: true
@@ -34,11 +17,3 @@ spring:
           auth: true
           starttls:
             enable: true
-queue:
-  name: "teste"
-
-mail-trap:
-  from: "mailtrap@chiragpadyal.me"
-  api-key: 
-
-

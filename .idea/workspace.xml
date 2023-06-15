@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="15ab3fdb-6fa3-4b9e-a74f-82c18a0782ec" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="workspaceImportEnabled" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2MYVbjSFhmCoS1iPfg91jReWnEY" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/chiragsp/Documents/Code/notification-service&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.7252874&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.com.haulmont.jpb.tools&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;77c30af85a7fe1e8442785693a2bcb25&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/../config-server/src/main/resources/config" />
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.NotificationServiceApplication">
+    <configuration name="generated-requests | #3" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="3" requestIdentifier="#3" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="mail.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/RapidComments_Backend/notification-service/templates/mail.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="ApplicationGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="application-gateway" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.RapidComments.applicationgateway.ApplicationGatewayApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CommentServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <option name="ACTIVE_PROFILES" value="local" />
+      <module name="Comment-Service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.RapidComments.CommentService.CommentServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ConfigServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="config-server" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.RapidComments.configserver.ConfigServerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NotificationServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="notification-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.RapidComments.notificationservice.NotificationServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServiceDiscoveryApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="service-discovery" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.RapidComments.servicediscovery.ServiceDiscoveryApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="HTTP Request.generated-requests | #3" />
+      <item itemvalue="JavaScript Debug.mail.html" />
+      <item itemvalue="Spring Boot.ConfigServerApplication" />
+      <item itemvalue="Spring Boot.ServiceDiscoveryApplication" />
+      <item itemvalue="Spring Boot.ApplicationGatewayApplication" />
+      <item itemvalue="Spring Boot.CommentServiceApplication" />
+      <item itemvalue="Spring Boot.NotificationServiceApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.mail.html" />
+        <item itemvalue="HTTP Request.generated-requests | #3" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="15ab3fdb-6fa3-4b9e-a74f-82c18a0782ec" name="Changes" comment="" />
+      <created>1677944579856</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1677944579856</updated>
+      <workItem from="1677944580479" duration="19340000" />
+      <workItem from="1678004923576" duration="1427000" />
+      <workItem from="1678013994326" duration="11387000" />
+      <workItem from="1678038249920" duration="2406000" />
+      <workItem from="1678112918943" duration="657000" />
+      <workItem from="1678117203831" duration="1000" />
+      <workItem from="1678133812948" duration="8265000" />
+      <workItem from="1678175463322" duration="3368000" />
+      <workItem from="1678179855570" duration="10698000" />
+      <workItem from="1678441542086" duration="8573000" />
+      <workItem from="1678478695589" duration="10436000" />
+      <workItem from="1678523213143" duration="10934000" />
+      <workItem from="1685998688590" duration="5008000" />
+      <workItem from="1686050500256" duration="6721000" />
+      <workItem from="1686112652567" duration="16996000" />
+      <workItem from="1686221669184" duration="4199000" />
+      <workItem from="1686306598848" duration="1723000" />
+      <workItem from="1686316085840" duration="1105000" />
+      <workItem from="1686418308680" duration="3348000" />
+      <workItem from="1686422537593" duration="11597000" />
+      <workItem from="1686463663500" duration="8484000" />
+      <workItem from="1686494747080" duration="8124000" />
+      <workItem from="1686571564202" duration="503000" />
+      <workItem from="1686572687231" duration="912000" />
+      <workItem from="1686660731720" duration="5128000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

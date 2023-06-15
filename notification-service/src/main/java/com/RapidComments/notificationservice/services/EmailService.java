@@ -19,6 +19,7 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -63,23 +64,19 @@ public class EmailService {
     }
 
 
-    public void sendEmail(EmailModel emailModel) throws MessagingException, IOException, TemplateException {
+    public void sendEmail(EmailModel[][] emailModels) throws MessagingException, IOException, TemplateException {
         MimeMessage message = mailSender.createMimeMessage();
 
         message.setFrom(new InternetAddress(from));
         message.setRecipient(Message.RecipientType.TO,
-                new InternetAddress(emailModel.getEmailId()));
+                new InternetAddress(emailModels[0][0].getEmailId()));
 
-        message.setSubject(emailModel.getMessageHeader());
+        message.setSubject(emailModels[0][0].getMessageHeader());
 
         // message body
         Template t = config.getTemplate("mail.ftl");
         Map<String, Object> model = new HashMap<>();
-        model.put("username", emailModel.getRecipientName());
-        model.put("user_comment", emailModel.getMessageBody());
-        model.put("reply", emailModel.getReplyBody());
-        model.put("thread_name", emailModel.getThreadName());
-        model.put("post_title", emailModel.getSubThreadName());
+        model.put("thread", emailModels);
         String html = FreeMarkerTemplateUtils.processTemplateIntoString(t, model);
         message.setContent(html, "text/html; charset=utf-8");
 

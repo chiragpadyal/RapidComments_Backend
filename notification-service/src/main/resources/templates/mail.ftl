@@ -47,16 +47,20 @@
 <div class="container">
     <h1>Someone replied to your comment.</h1>
 
-    <p>Hi ${username},</p>
+    <p>Hi ${thread[0][0].recipientName},</p>
 
-    <p>Someone has replied to your comment on ${post_title}. Here are the details:</p>
+    <#list thread as subthread>
+        <p>Someone has replied to your comment on ${subthread[0].subThreadName}. Here are the details:</p>
+        <#list subthread as message>
+            <div class="comment" >
+                <p><strong>Comment:</strong> ${message.messageBody}</p>
+                <p><strong>Reply:</strong> ${message.replyBody}</p>
+            </div>
+        </#list>
+    </#list>
 
-    <div class="comment">
-        <p><strong>Comment:</strong> ${user_comment}</p>
-        <p><strong>Reply:</strong> ${reply}</p>
-    </div>
 
-    <p>You can view the conversation and reply directly on the platform by ${thread_name}.</p>
+    <p>You can view the conversation and reply directly on the platform by ${thread[0][0].threadName}.</p>
 
     <p>Thank you for using our messaging service!</p>
 
