@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
+//import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -21,12 +21,16 @@ public class EmailScheduler {
     private final Map<String, EmailAggregator> emailAggregators = new HashMap<>();
     @Value("${email-server-url}")
     private String emailServerUrl = "";
+
+    @Autowired
+    private RabbitTemplate template;
+
     @Autowired
     private EmailRepo emailRepo;
 
     @Scheduled(cron = "${mail-trap.cron}")
     public void aggregateEmails() {
-        RestTemplate restTemplate = new RestTemplate();
+//        RestTemplate restTemplate = new RestTemplate();
 
         log.info("Current time is :: " + LocalDateTime.now());
         List<EmailModel> unReadEmails = emailRepo.findByIsRead(false);
@@ -46,10 +50,10 @@ public class EmailScheduler {
                 // of same thread
                 List<List<EmailModel>> groupOfSameThreadName = new ArrayList(it.next());
 
-//                template.convertAndSend(RabbitMqConfiguration.EXCHANGE,
-//                        RabbitMqConfiguration.EMAIL_ROUTING_KEY, groupOfSameThreadName);
+                template.convertAndSend(RabbitMqConfiguration.EXCHANGE,
+                        RabbitMqConfiguration.EMAIL_ROUTING_KEY, groupOfSameThreadName);
 
-                restTemplate.postForEntity(emailServerUrl, groupOfSameThreadName, String.class);
+//                restTemplate.postForEntity(emailServerUrl, groupOfSameThreadName, String.class);
             }
         }
     }

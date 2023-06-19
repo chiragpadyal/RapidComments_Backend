@@ -11,7 +11,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/notify")
+@RequestMapping("api/notification-service")
 public class Publisher {
     private RabbitTemplate template;
     private final EmailService mailtrapClient;
