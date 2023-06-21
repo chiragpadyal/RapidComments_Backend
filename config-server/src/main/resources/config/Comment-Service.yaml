@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8060
 
 auth0:
   audience: http://localhost:8080
@@ -36,3 +36,5 @@ management:
   tracing:
     sampling:
       probability: 1.0
+
+allowed-origin: 'http://localhost:4200'

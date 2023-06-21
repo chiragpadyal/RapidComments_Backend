@@ -25,11 +25,13 @@ spring:
 
 mail-trap:
   from: "mailtrap@chiragpadyal.me"
-  api-key: ""
-  api-key: ""
+  api-key: "b7c79b966f0ff19f845473c0ede02997"
   cron: "0 */5 * ? * *"
   username: "api"
   port: 587
   host: "live.smtp.mailtrap.io"
 
-email-server-url: "http://localhost:8443/notify/push-mail"
+email-server-url: "http://localhost:8080/api/notification-service/push-mail"
+
+
+allowed-origin: 'http://localhost:4200'

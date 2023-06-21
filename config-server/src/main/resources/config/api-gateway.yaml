@@ -1,6 +1,6 @@
 
 server:
-  port: 8060
+  port: 8080
 
 eureka:
   client:
@@ -12,20 +12,27 @@ management:
     sampling:
       probability: 1.0
 
-
 spring:
   cloud:
     gateway:
       default-filters:
         - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
-      globalcors:
-        corsConfigurations:
-          '[/**]':
-            allowedOrigins: "*"
-            allowedMethods: "*"
-            allowedHeaders: "*"
       routes:
         - id: Comment-Service
           uri: lb://Comment-Service
           predicates:
             - Path=/api/comment-service/**
+        - id: notification-service
+          uri: lb://notification-service
+          predicates:
+            - Path=/api/notification-service/**
+
+
+  security:
+    oauth2:
+      resourceserver:
+        jwk:
+          jwk-set-uri: http://localhost:8080
+          issuer-uri: https://dev-qx1buviid5yofprn.us.auth0.com/
+
+allowed-origin: 'http://localhost:4200'
