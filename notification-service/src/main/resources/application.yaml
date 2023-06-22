@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: notification-service
+  mail:
+    host: ${mail-trap.host}
+    port: ${mail-trap.port}
+    username: ${mail-trap.username}
+    password: ${mail-trap.api-key}
+    auth: "PLAIN"
+    starttls:
+      enable: true
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true

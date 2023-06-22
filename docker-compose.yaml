@@ -14,8 +14,8 @@ services:
       - rapid-comment
 
   zipkin:
-    image: openzipkin/zipkin
     container_name: zipkin
+    image: openzipkin/zipkin
     ports:
       - 9411:9411
     networks:
@@ -36,7 +36,7 @@ services:
     networks:
       - rapid-comment
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:15672"]
+      test: rabbitmq-diagnostics -q ping
       interval: 30s
       timeout: 10s
       retries: 5
@@ -67,8 +67,8 @@ services:
       - rapid-comment
     environment:
       - SPRING_APPLICATION_NAME=service-registry
+      - SPRING_PROFILES_ACTIVE=prod
       - SPRING_CONFIG_IMPORT=configserver:http://config:8088
-      # - SPRING_PROFILES_ACTIVE=production
     depends_on:
       config:
         condition: service_healthy
@@ -88,10 +88,8 @@ services:
       - rapid-comment
     environment:
       - SPRING_APPLICATION_NAME=api-gateway
+      - SPRING_PROFILES_ACTIVE=prod
       - SPRING_CONFIG_IMPORT=configserver:http://config:8088
-      # - SPRING_PROFILES_ACTIVE=production
-      # - EUREKA_INSTANCE_HOSTNAME=service-discovery
-      # - MANAGEMENT_ZIPKIN_TRACING_ENDPOINT=http://zipkin:9411/api/v2/spans
     depends_on:
       service-discovery:
         condition: service_healthy
@@ -109,12 +107,8 @@ services:
       - rapid-comment
     environment:
       - SPRING_APPLICATION_NAME=Comment-Service
+      - SPRING_PROFILES_ACTIVE=prod
       - SPRING_CONFIG_IMPORT=configserver:http://config:8088
-      # - SPRING_PROFILES_ACTIVE=production
-      # - EUREKA_INSTANCE_HOSTNAME=service-discovery
-      # - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/rapidcomment
-      # - SPRING_ZIPKIN_BASEURL=http://zipkin:9411
-      # - MANAGEMENT_ZIPKIN_TRACING_ENDPOINT=http://zipkin:9411/api/v2/spans
     depends_on:
       application-gateway:
         condition: service_healthy
@@ -128,25 +122,13 @@ services:
     networks:
       - rapid-comment
     environment:
+      - SPRING_PROFILES_ACTIVE=prod
       - SPRING_APPLICATION_NAME=notification-service
       - SPRING_CONFIG_IMPORT=configserver:http://config:8088
-      # - SPRING_PROFILES_ACTIVE=production
-      # - EUREKA_INSTANCE_HOSTNAME=service-discovery
-      # - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/rapidcomment
-      # - SPRING_RABBITMQ_HOST=rabbitmq
-      - SPRING_MAIL_HOST="live.smtp.mailtrap.io"
-      - SPRING_MAIL_PORT=587
-      - SPRING_MAIL_USERNAME="api"
-      - SPRING_MAIL_PASSWORD="b7c79b966f0ff19f845473c0ede02997"
-      - SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH=true
-      - SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE=true
-      - SPRING_MAIL_AUTH="PLAIN"
-      - SPRING_MAIL_STARTTLS="true"
     depends_on:
       application-gateway:
         condition: service_healthy
-      rabbitmq:
-        condition: service_healthy
+
 networks:
   rapid-comment:
     driver: bridge
