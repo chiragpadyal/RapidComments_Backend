@@ -4,11 +4,11 @@ server:
 eureka:
   client:
     service-url:
-      default-zone: http://localhost:8761/eureka/
+      default-zone: http://service-discovery:8761/eureka/
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/rapidcomment
+    url: jdbc:postgresql://database:5432/rapidcomment
     username: postgres
     password: password
     jpa:
@@ -17,11 +17,10 @@ spring:
         ddl-auto: update
 
     rabbitmq:
-      host: "127.0.0.1"
+      host: rabbitmq
       port: "5672"
       username: "guest"
       password: "guest"
-
 
 mail-trap:
   from: "mailtrap@chiragpadyal.me"
@@ -31,7 +30,6 @@ mail-trap:
   port: 587
   host: "live.smtp.mailtrap.io"
 
-email-server-url: "http://localhost:8080/api/notification-service/push-mail"
+email-server-url: "http://service-discovery:8080/api/notification-service/push-mail"
 
-
-allowed-origin: 'http://localhost:4200'
+allowed-origin: "http://localhost:4200"

@@ -15,7 +15,6 @@ import org.springframework.web.cors.reactive.CorsConfigurationSource;
 import org.springframework.web.cors.reactive.CorsWebFilter;
 import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 
-
 import java.util.List;
 
 @Configuration
@@ -27,10 +26,13 @@ public class SecurityConfig {
 
     @Value("${allowed-origin}")
     private String allowedOrigin;
+
     @Bean
-    public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http){
+    public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
         http
                 .authorizeExchange()
+                // allow actuator health check
+                .pathMatchers("/actuator/health").permitAll()
                 .anyExchange().authenticated()
                 .and().cors().configurationSource(corsConfiguration())
                 .and()
@@ -55,11 +57,12 @@ public class SecurityConfig {
         source.registerCorsConfiguration("/**", corsConfig);
         return source;
     }
-/*    @Bean
-
-    @Bean
-    public CorsWebFilter corsWebFilter() {
-        return new CorsWebFilter(corsConfiguration());
-    }*/
+    /*
+     * @Bean
+     * 
+     * @Bean
+     * public CorsWebFilter corsWebFilter() {
+     * return new CorsWebFilter(corsConfiguration());
+     * }
+     */
 }
-

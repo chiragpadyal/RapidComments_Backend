@@ -1,0 +1,152 @@
+version: "3"
+services:
+  database:
+    container_name: "database"
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=rapidcomment
+    networks:
+      - rapid-comment
+
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    ports:
+      - 9411:9411
+    networks:
+      - rapid-comment
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: "rabbitmq"
+    ports:
+      - 5672:5672
+      - 15672:15672
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    volumes:
+      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    networks:
+      - rapid-comment
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:15672"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  config:
+    container_name: "config"
+    image: config
+    build: config-server
+    ports:
+      - 8088:8088
+    networks:
+      - rapid-comment
+    depends_on:
+      - database
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8088/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  service-discovery:
+    container_name: "service-discovery"
+    image: service-discovery
+    build: service-discovery
+    ports:
+      - "8761:8761"
+    networks:
+      - rapid-comment
+    environment:
+      - SPRING_APPLICATION_NAME=service-registry
+      - SPRING_CONFIG_IMPORT=configserver:http://config:8088
+      # - SPRING_PROFILES_ACTIVE=production
+    depends_on:
+      config:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8761/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  application-gateway:
+    container_name: "application-gateway"
+    image: application-gateway
+    build: application-gateway
+    ports:
+      - "8080:8080"
+    networks:
+      - rapid-comment
+    environment:
+      - SPRING_APPLICATION_NAME=api-gateway
+      - SPRING_CONFIG_IMPORT=configserver:http://config:8088
+      # - SPRING_PROFILES_ACTIVE=production
+      # - EUREKA_INSTANCE_HOSTNAME=service-discovery
+      # - MANAGEMENT_ZIPKIN_TRACING_ENDPOINT=http://zipkin:9411/api/v2/spans
+    depends_on:
+      service-discovery:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  comment-service:
+    container_name: "comment-service"
+    image: comment-service
+    build: comment-service
+    networks:
+      - rapid-comment
+    environment:
+      - SPRING_APPLICATION_NAME=Comment-Service
+      - SPRING_CONFIG_IMPORT=configserver:http://config:8088
+      # - SPRING_PROFILES_ACTIVE=production
+      # - EUREKA_INSTANCE_HOSTNAME=service-discovery
+      # - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/rapidcomment
+      # - SPRING_ZIPKIN_BASEURL=http://zipkin:9411
+      # - MANAGEMENT_ZIPKIN_TRACING_ENDPOINT=http://zipkin:9411/api/v2/spans
+    depends_on:
+      application-gateway:
+        condition: service_healthy
+
+  notification-service:
+    container_name: "notification-service"
+    image: notification-service
+    build: notification-service
+    ports:
+      - "8443:8443"
+    networks:
+      - rapid-comment
+    environment:
+      - SPRING_APPLICATION_NAME=notification-service
+      - SPRING_CONFIG_IMPORT=configserver:http://config:8088
+      # - SPRING_PROFILES_ACTIVE=production
+      # - EUREKA_INSTANCE_HOSTNAME=service-discovery
+      # - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/rapidcomment
+      # - SPRING_RABBITMQ_HOST=rabbitmq
+      - SPRING_MAIL_HOST="live.smtp.mailtrap.io"
+      - SPRING_MAIL_PORT=587
+      - SPRING_MAIL_USERNAME="api"
+      - SPRING_MAIL_PASSWORD="b7c79b966f0ff19f845473c0ede02997"
+      - SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH=true
+      - SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE=true
+      - SPRING_MAIL_AUTH="PLAIN"
+      - SPRING_MAIL_STARTTLS="true"
+    depends_on:
+      application-gateway:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+networks:
+  rapid-comment:
+    driver: bridge
